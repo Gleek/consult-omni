@@ -83,7 +83,8 @@ with a leading “=” character."
 
 QUERY is the user input string."
   (cl-loop for candidate in candidates
-           when (not (equal candidate "?"))
+           when (not (or (equal candidate "?")
+                         (equal candidate "error")))
            collect candidate))
 
 (defun consult-omni--numi-valid-input-p (&optional input)
@@ -119,7 +120,7 @@ well as the function
                             :require-match t
                             :face 'consult-omni-engine-title-face
                             :request #'consult-omni--numi-builder
-                            :vali-input #'consult-omni--numi-valid-input-p
+                            :valid-input #'consult-omni--numi-valid-input-p
                             :filter #'consult-omni--numi-filter
                             :on-preview #'ignore
                             :on-return #'identity
