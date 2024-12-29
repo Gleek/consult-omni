@@ -94,7 +94,7 @@
 Uses `consult-omni-apps-open-command-args' as the main command line program
 If FILE is non-nil, returns a command line for opeing the FILE with APP."
   (append (consult--build-args consult-omni-apps-open-command-args)
-          (list (format "%s" app))
+          (list (shell-quote-argument (format "%s" app)))
           (if (and file (file-exists-p (file-truename file))) (list (format "%s" file)))
           (list "&")))
 
